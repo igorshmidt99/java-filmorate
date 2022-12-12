@@ -16,7 +16,7 @@ public class FilmController {
 
     @GetMapping
     public Map<Integer, Film> getFilms() {
-        log.info("Список фильмов передан.");
+        log.info("Список фильмов в размере {} передан.", films.size());
         return films;
     }
 
