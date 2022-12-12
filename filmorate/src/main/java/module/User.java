@@ -9,7 +9,6 @@ import java.time.LocalDate;
 @Data
 @Builder(toBuilder = true)
 public class User {
-    @NonNull
     private final int id;
     @NonNull
     private String email;
