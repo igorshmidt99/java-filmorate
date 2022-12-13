@@ -1,6 +1,6 @@
 package controller;
 
-import controller.Exceptions.UserExistException;
+import controller.Exceptions.Exist.UserExistException;
 import lombok.extern.slf4j.Slf4j;
 import module.User;
 import org.springframework.web.bind.annotation.*;
