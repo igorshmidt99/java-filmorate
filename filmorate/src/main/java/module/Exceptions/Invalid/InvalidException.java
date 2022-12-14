@@ -1,4 +1,4 @@
-package controller.Exceptions.Invalid;
+package module.Exceptions.Invalid;
 
 import lombok.experimental.StandardException;
 

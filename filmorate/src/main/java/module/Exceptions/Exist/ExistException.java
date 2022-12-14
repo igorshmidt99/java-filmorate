@@ -1,4 +1,4 @@
-package controller.Exceptions.Exist;
+package module.Exceptions.Exist;
 
 import lombok.experimental.StandardException;
 

@@ -1,6 +1,6 @@
 package controller;
 
-import controller.Exceptions.Exist.FilmExistException;
+import module.Exceptions.Exist.FilmExistException;
 import lombok.extern.slf4j.Slf4j;
 import module.Film;
 import org.springframework.web.bind.annotation.*;
