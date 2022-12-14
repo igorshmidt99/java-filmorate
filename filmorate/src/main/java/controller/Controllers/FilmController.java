@@ -3,15 +3,15 @@ package controller.Controllers;
 import controller.Validators.FilmRequestValidator;
 import controller.Validators.Validator;
 import lombok.extern.slf4j.Slf4j;
+import module.Components.Film;
 import module.Exceptions.Exist.ExistException;
+import module.Exceptions.Exist.FilmExistException;
 import module.Exceptions.Invalid.InvalidException;
 import org.springframework.web.bind.annotation.*;
 
-import static module.Data.DataStorage.films;
-import module.Exceptions.Exist.FilmExistException;
-import module.Components.Film;
-
 import java.util.Map;
+
+import static module.Data.DataStorage.films;
 
 @RestController
 @RequestMapping("/films")
@@ -26,7 +26,7 @@ public class FilmController {
     }
 
     @PostMapping
-    public void postFilm(@RequestBody Film film) throws FilmExistException {
+    public void postFilm(@RequestBody Film film) {
         try {
             if (films.containsValue(film)) throw new FilmExistException("Этот фильм уже добавлен.");
             validator.validate(film);
@@ -38,7 +38,7 @@ public class FilmController {
     }
 
     @PutMapping
-    public void putFilm(@RequestBody Film film) throws FilmExistException {
+    public void putFilm(@RequestBody Film film) {
         try {
             if (!films.containsKey(film.getId())) throw new FilmExistException("Этого фильма нет в коллекции.");
             validator.validate(film);
