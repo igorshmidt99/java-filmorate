@@ -1,4 +1,4 @@
-package module;
+package module.Components;
 
 import lombok.Builder;
 import lombok.Data;

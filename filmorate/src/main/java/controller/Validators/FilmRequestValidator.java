@@ -1,13 +1,13 @@
 package controller.Validators;
 
 import module.Exceptions.Invalid.FilmInvalidException;
-import module.Film;
+import module.Components.Film;
 
 import java.time.LocalDate;
 
 public class FilmRequestValidator implements Validator<Film> {
     @Override
-    public void valid(Film film) throws FilmInvalidException {
+    public void validate(Film film) throws FilmInvalidException {
         StringBuilder errorText = new StringBuilder();
         if (film.getName().isBlank())
             errorText.append("Название не может быть пустым.\n");
