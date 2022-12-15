@@ -1,7 +1,6 @@
 package controller.Validators;
 
 import module.Components.Film;
-import module.Data.DataStorage;
 import module.Exceptions.Invalid.InvalidException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -75,5 +74,10 @@ class FilmRequestValidatorTest {
                 .build();
         InvalidException e = assertThrows(InvalidException.class, () -> validator.validate(film));
         assertEquals(e.getMessage(), expectedMessage);
+    }
+
+    @Test
+    void whenIsNoMistakeDoesntThrowException() {
+        assertDoesNotThrow(() -> validator.validate(film));
     }
 }

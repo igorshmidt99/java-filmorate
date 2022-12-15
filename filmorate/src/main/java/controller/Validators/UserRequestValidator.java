@@ -16,9 +16,8 @@ public class UserRequestValidator implements Validator<User>{
             error.append("Логин не может быть пустым и содержать пробелы\n");
         if (user.getName().isBlank())
             user.setName(user.getLogin());
-        if (user.getBirthday().isAfter(LocalDate.from(Instant.now())))
+        if (user.getBirthday().isAfter(LocalDate.now()))
             error.append("Дата рождения не может быть в будущем.\n");
-        if (error.toString().isEmpty())
-            throw new UserInvalidException(error.toString());
+        if (!error.toString().isEmpty()) throw new UserInvalidException(error.toString());
     }
 }

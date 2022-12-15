@@ -1,6 +1,5 @@
 package module.Data;
 
-import module.Exceptions.Exist.UserExistException;
 import module.Components.Film;
 import module.Components.User;
 
