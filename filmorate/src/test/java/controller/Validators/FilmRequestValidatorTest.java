@@ -1,7 +1,9 @@
 package controller.Validators;
 
-import module.Components.Film;
-import module.Exceptions.Invalid.InvalidException;
+import ru.yandex.practicum.filmorate.controller.Validators.FilmRequestValidator;
+import ru.yandex.practicum.filmorate.controller.Validators.Validator;
+import ru.yandex.practicum.filmorate.module.Components.Film;
+import ru.yandex.practicum.filmorate.module.Exceptions.Invalid.InvalidException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

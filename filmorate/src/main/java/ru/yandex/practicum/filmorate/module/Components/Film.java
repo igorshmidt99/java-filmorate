@@ -1,4 +1,4 @@
-package module.Components;
+package ru.yandex.practicum.filmorate.module.Components;
 
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +10,8 @@ import java.time.LocalDate;
 @Data
 @Builder(toBuilder = true)
 public class Film {
-    private final int id;
+    @NonNull
+    private int id;
     private final String name;
     private final LocalDate releaseDate;
     private final Duration duration;

@@ -1,4 +1,4 @@
-package module.Components;
+package ru.yandex.practicum.filmorate.module.Components;
 
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +9,8 @@ import java.time.LocalDate;
 @Data
 @Builder(toBuilder = true)
 public class User {
-    private final int id;
+    @NonNull
+    private int id;
     @NonNull
     private String email;
     @NonNull
