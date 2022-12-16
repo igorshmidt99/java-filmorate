@@ -10,6 +10,7 @@ import ru.yandex.practicum.filmorate.module.Exceptions.Exist.ExistException;
 import ru.yandex.practicum.filmorate.module.Exceptions.Exist.UserExistException;
 import ru.yandex.practicum.filmorate.module.Exceptions.Invalid.InvalidException;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static ru.yandex.practicum.filmorate.module.ComponentsManager.getUsersList;
@@ -32,7 +33,7 @@ public class UserController {
     }
 
     @PostMapping
-    public User postUser(@RequestBody User user) throws UserExistException, InvalidException {
+    public User postUser(@Valid @RequestBody User user) throws UserExistException, InvalidException {
         try {
             for (User u : users.values()) {
                 if (user.getEmail().equals(u.getEmail()))
@@ -50,7 +51,7 @@ public class UserController {
     }
 
     @PutMapping
-    public User putUser(@RequestBody User user) throws UserExistException, InvalidException {
+    public User putUser(@Valid @RequestBody User user) throws UserExistException, InvalidException {
         try {
             if (!users.containsKey(user.getId())) throw new UserExistException("Этого пользователя не существует.");
             validator.validate(user);

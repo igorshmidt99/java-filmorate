@@ -10,6 +10,7 @@ import ru.yandex.practicum.filmorate.module.Exceptions.Exist.ExistException;
 import ru.yandex.practicum.filmorate.module.Exceptions.Exist.FilmExistException;
 import ru.yandex.practicum.filmorate.module.Exceptions.Invalid.InvalidException;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static ru.yandex.practicum.filmorate.module.ComponentsManager.getFilmsList;
@@ -32,7 +33,7 @@ public class FilmController {
     }
 
     @PostMapping
-    public Film postFilm(@RequestBody Film film) throws FilmExistException, InvalidException {
+    public Film postFilm(@Valid @RequestBody Film film) throws FilmExistException, InvalidException {
         try {
             if (films.containsValue(film)) throw new FilmExistException("Этот фильм уже добавлен.");
             validator.validate(film);
@@ -47,7 +48,7 @@ public class FilmController {
     }
 
     @PutMapping
-    public Film putFilm(@RequestBody Film film) throws FilmExistException, InvalidException {
+    public Film putFilm(@Valid @RequestBody Film film) throws FilmExistException, InvalidException {
         try {
             if (!films.containsKey(film.getId())) throw new FilmExistException("Этого фильма нет в коллекции.");
             validator.validate(film);
