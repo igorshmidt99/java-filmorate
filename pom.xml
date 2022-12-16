@@ -40,11 +40,6 @@
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 	</dependencies>
-
-	<distributionManagement>
-		<downloadUrl>java-filmorate/pom.xml</downloadUrl>
-	</distributionManagement>
-
 	<build>
 		<plugins>
 			<plugin>
