@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ru.yandex.practicum</groupId>
-	<artifactId>filmorate</artifactId>
+	<artifactId>java-filmorate</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>filmorate</name>
+	<name>java-filmorate</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
@@ -21,7 +21,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -40,7 +39,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
-    </dependencies>
+	</dependencies>
+
+	<distributionManagement>
+		<downloadUrl>java-filmorate/pom.xml</downloadUrl>
+	</distributionManagement>
 
 	<build>
 		<plugins>
@@ -55,6 +58,11 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.7.1</version>
 			</plugin>
 		</plugins>
 	</build>
