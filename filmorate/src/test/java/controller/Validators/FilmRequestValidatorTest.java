@@ -22,7 +22,7 @@ class FilmRequestValidatorTest {
                 .id(1)
                 .name("The Green Mile")
                 .releaseDate(LocalDate.of(2000, 1, 1))
-                .duration(Duration.ofMinutes(90))
+                .duration(90)
                 .description("Jest")
                 .build();
     }
@@ -53,7 +53,7 @@ class FilmRequestValidatorTest {
 
     @Test
     void whenFilmDurationIsNegativeThrowException() {
-        film = film.toBuilder().duration(Duration.ofMinutes(-90)).build();
+        film = film.toBuilder().duration(-90).build();
         InvalidException e = assertThrows(InvalidException.class, () -> validator.validate(film));
         assertEquals(e.getMessage(), "Продолжительность фильма должна быть положительной.\n");
     }
@@ -72,7 +72,7 @@ class FilmRequestValidatorTest {
                 "Однако гигант Джон Коффи, обвинённый в страшном преступлении, " +
                 "стал одним из самых необычных обитателей блока.")
                 .releaseDate(LocalDate.of(1894, 1, 1))
-                .duration(Duration.ofMinutes(-90))
+                .duration(-90)
                 .build();
         InvalidException e = assertThrows(InvalidException.class, () -> validator.validate(film));
         assertEquals(e.getMessage(), expectedMessage);

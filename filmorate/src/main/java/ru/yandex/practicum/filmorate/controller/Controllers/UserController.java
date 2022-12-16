@@ -10,9 +10,11 @@ import ru.yandex.practicum.filmorate.module.Exceptions.Exist.ExistException;
 import ru.yandex.practicum.filmorate.module.Exceptions.Exist.UserExistException;
 import ru.yandex.practicum.filmorate.module.Exceptions.Invalid.InvalidException;
 
-import java.util.Map;
+import static ru.yandex.practicum.filmorate.module.ComponentsManager.getUsersList;
+import static ru.yandex.practicum.filmorate.module.ComponentsStorage.*;
 
-import static ru.yandex.practicum.filmorate.module.DataStorage.users;
+import java.util.List;
+
 
 @Slf4j
 @RestController
@@ -21,9 +23,9 @@ public class UserController {
     private final Validator<User> validator = new UserRequestValidator();
 
     @GetMapping
-    public Map<Integer, User> getUsers() {
+    public List<User> getUsers() {
         log.info("Список пользователей в размере {} передан", users.size());
-        return users;
+        return getUsersList();
     }
 
     @PostMapping
@@ -34,12 +36,12 @@ public class UserController {
                     throw new UserExistException("Пользователь с таким email уже существует!");
             }
             validator.validate(user);
-            ComponentsManager.setId(user);
+            ComponentsManager.createId(user);
             users.put(user.getId(), user);
             log.info("Новый пользователь {}, {} добавлен.", user.getName(), user.getEmail());
             return user;
         } catch (InvalidException | ExistException e) {
-            log.warn(e.getMessage(), e);
+            log.error(e.getMessage(), e);
             throw e;
         }
     }
@@ -47,13 +49,13 @@ public class UserController {
     @PutMapping
     public User putUser(@RequestBody User user) throws UserExistException, InvalidException {
         try {
-            if (!users.containsValue(user)) throw new UserExistException("Этого пользователя не существует.");
+            if (!users.containsKey(user.getId())) throw new UserExistException("Этого пользователя не существует.");
             validator.validate(user);
             users.put(user.getId(), user);
             log.info("Данные пользователя {}, {} обновлены.", user.getName(), user.getEmail());
             return user;
         } catch (InvalidException | ExistException e) {
-            log.warn(e.getMessage(), e);
+            log.error(e.getMessage(), e);
             throw e;
         }
     }

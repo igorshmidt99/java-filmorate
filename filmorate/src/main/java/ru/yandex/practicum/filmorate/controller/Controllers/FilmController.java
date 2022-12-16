@@ -10,9 +10,10 @@ import ru.yandex.practicum.filmorate.module.Exceptions.Exist.ExistException;
 import ru.yandex.practicum.filmorate.module.Exceptions.Exist.FilmExistException;
 import ru.yandex.practicum.filmorate.module.Exceptions.Invalid.InvalidException;
 
-import java.util.Map;
+import java.util.List;
 
-import static ru.yandex.practicum.filmorate.module.DataStorage.films;
+import static ru.yandex.practicum.filmorate.module.ComponentsManager.getFilmsList;
+import static ru.yandex.practicum.filmorate.module.ComponentsStorage.films;
 
 @Slf4j
 @RestController
@@ -21,9 +22,9 @@ public class FilmController {
     private final Validator<Film> validator = new FilmRequestValidator();
 
     @GetMapping
-    public Map<Integer, Film> getFilms() {
+    public List<Film> getFilms() {
         log.info("Список фильмов в размере {} передан.", films.size());
-        return films;
+        return getFilmsList();
     }
 
     @PostMapping
@@ -31,12 +32,12 @@ public class FilmController {
         try {
             if (films.containsValue(film)) throw new FilmExistException("Этот фильм уже добавлен.");
             validator.validate(film);
-            ComponentsManager.setId(film);
+            ComponentsManager.createId(film);
             films.put(film.getId(), film);
             log.info("Фильм {} добавлен в хранилище.", film.getName());
             return film;
         } catch (InvalidException | ExistException e) {
-            log.warn(e.getMessage(), e);
+            log.error(e.getMessage(), e);
             throw e;
         }
     }
@@ -50,7 +51,7 @@ public class FilmController {
             log.info("Информация о фильме {} изменена.", film.getName());
             return film;
         } catch (InvalidException | ExistException e) {
-            log.warn(e.getMessage(), e);
+            log.error(e.getMessage(), e);
             throw e;
         }
     }

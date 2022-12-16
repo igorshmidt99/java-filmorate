@@ -13,9 +13,9 @@ public class FilmRequestValidator implements Validator<Film> {
             errorText.append("Название не может быть пустым.\n");
         if (film.getDescription().length() > 200)
             errorText.append("Максимальная длина описания — 200 символов.\n");
-        if (film.getReleaseDate().isBefore(LocalDate.of(1985, 12, 28)))
+        if (film.getReleaseDate().isBefore(LocalDate.of(1895, 12, 28)))
             errorText.append("Дата релиза — не раньше 28 декабря 1895 года.\n");
-        if (film.getDuration().isNegative())
+        if (film.getDuration() < 0)
             errorText.append("Продолжительность фильма должна быть положительной.\n");
         if (!errorText.toString().isEmpty()) throw new FilmInvalidException(errorText.toString());
     }

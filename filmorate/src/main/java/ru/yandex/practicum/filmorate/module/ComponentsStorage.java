@@ -5,10 +5,9 @@ import lombok.Setter;
 import ru.yandex.practicum.filmorate.module.Components.Film;
 import ru.yandex.practicum.filmorate.module.Components.User;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-public class DataStorage {
+public class ComponentsStorage {
     @Getter
     @Setter
     private static int filmIdCounter;
