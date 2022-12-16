@@ -10,11 +10,14 @@ import ru.yandex.practicum.filmorate.module.Exceptions.Exist.ExistException;
 import ru.yandex.practicum.filmorate.module.Exceptions.Exist.UserExistException;
 import ru.yandex.practicum.filmorate.module.Exceptions.Invalid.InvalidException;
 
-import static ru.yandex.practicum.filmorate.module.ComponentsManager.getUsersList;
-import static ru.yandex.practicum.filmorate.module.ComponentsStorage.*;
-
 import java.util.List;
 
+import static ru.yandex.practicum.filmorate.module.ComponentsManager.getUsersList;
+import static ru.yandex.practicum.filmorate.module.ComponentsStorage.users;
+
+/**
+ * Это контроллер, который обрабатывает GET, POST & PUT запросы по пути /films
+ * */
 
 @Slf4j
 @RestController

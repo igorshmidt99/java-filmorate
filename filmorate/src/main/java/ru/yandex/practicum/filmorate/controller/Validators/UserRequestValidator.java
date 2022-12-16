@@ -1,11 +1,29 @@
 package ru.yandex.practicum.filmorate.controller.Validators;
 
-import ru.yandex.practicum.filmorate.module.Exceptions.Invalid.UserInvalidException;
 import ru.yandex.practicum.filmorate.module.Components.User;
+import ru.yandex.practicum.filmorate.module.Exceptions.Invalid.UserInvalidException;
 
 import java.time.LocalDate;
-
+/**
+ * Реализует интерфейс Validator.
+ * <p>
+ *     Метод validate() проверяет поля объекта согласно требованиям:
+ *     <p>
+ *         email не может быть пустым и должна содержать символ @.
+ *         <p>
+ *         login не может быть пустым и содержать пробелы.
+ *         <p>
+ *         birthday не может быть в будущем.
+ *         <p>
+ *         В случае, если поле name null или пустое, то ему присваивается значение login.
+ *         <p>
+ *         Если состояние объекта не удовлетворяет требованиям, то в сообщение об ошибке вносится соответствующий текст, который передается в конструктор исключения.
+ * */
 public class UserRequestValidator implements Validator<User>{
+    /**
+     * @param user передается c запросом.
+     * @throws UserInvalidException в случае неудовлетворения требованиям.
+     * */
     @Override
     public void validate(User user) throws UserInvalidException {
         StringBuilder error = new StringBuilder();

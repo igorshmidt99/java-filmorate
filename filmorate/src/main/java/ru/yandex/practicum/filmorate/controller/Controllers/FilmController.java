@@ -15,6 +15,10 @@ import java.util.List;
 import static ru.yandex.practicum.filmorate.module.ComponentsManager.getFilmsList;
 import static ru.yandex.practicum.filmorate.module.ComponentsStorage.films;
 
+/**
+ * Это контроллер, который обрабатывает GET, POST & PUT запросы по пути /films
+ * */
+
 @Slf4j
 @RestController
 @RequestMapping("/films")
