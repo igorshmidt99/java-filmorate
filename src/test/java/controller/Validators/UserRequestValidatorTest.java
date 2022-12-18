@@ -18,7 +18,7 @@ class UserRequestValidatorTest {
     static Validator<User> validator = new UserRequestValidator();
 
     @BeforeEach
-    void setUp() {
+     void setUp() {
         user = User.builder()
                 .name("Igor Shmidt")
                 .birthday(LocalDate.of(1999, 4, 7))
@@ -29,7 +29,7 @@ class UserRequestValidatorTest {
     }
 
     @Test
-    void whenEmailIsBlankAndEmailDoesntContainCharacterShouldThrowException() {
+    public void whenEmailIsBlankAndEmailDoesntContainCharacterShouldThrowException() {
         user = user.toBuilder().email("").build();
         InvalidException e = assertThrows(UserInvalidException.class, () -> validator.validate(user));
         assertEquals(e.getMessage(), "Электронная почта не может быть пустой и должна содержать символ @.\n");
@@ -39,7 +39,7 @@ class UserRequestValidatorTest {
     }
 
     @Test
-    void whenLogInIsEmptyShouldThrowException() {
+    public void whenLogInIsEmptyShouldThrowException() {
         user = user.toBuilder().login("").build();
         InvalidException e = assertThrows(UserInvalidException.class, () -> validator.validate(user));
         assertEquals(e.getMessage(), "Логин не может быть пустым и содержать пробелы\n");
@@ -49,21 +49,21 @@ class UserRequestValidatorTest {
     }
 
     @Test
-    void whenBirthdayDateIsInTheFutureShouldThrowException() {
+    public void whenBirthdayDateIsInTheFutureShouldThrowException() {
         user = user.toBuilder().birthday(LocalDate.of(2025, 1, 1)).build();
         InvalidException e = assertThrows(UserInvalidException.class, () -> validator.validate(user));
         assertEquals(e.getMessage(), "Дата рождения не может быть в будущем.\n");
     }
 
     @Test
-    void whenNameIsEmptyFieldNameTakesAValueFromLogin() throws InvalidException {
+    public void whenNameIsEmptyFieldNameTakesAValueFromLogin() throws InvalidException {
         user = user.toBuilder().name("").build();
         validator.validate(user);
         assertEquals(user.getName(), user.getLogin());
     }
 
     @Test
-    void whenUserRequestCollectAllMistakesShouldThrowSpecificMessageWithException() {
+    public void whenUserRequestCollectAllMistakesShouldThrowSpecificMessageWithException() {
         String message = "Электронная почта не может быть пустой и должна содержать символ @.\n" +
                 "Логин не может быть пустым и содержать пробелы\n" +
                 "Дата рождения не может быть в будущем.\n";
@@ -77,7 +77,7 @@ class UserRequestValidatorTest {
     }
 
     @Test
-    void whenIsNoMistakeDoesntException() {
+    public void whenIsNoMistakeDoesntException() {
         assertDoesNotThrow(() -> validator.validate(user));
     }
 }

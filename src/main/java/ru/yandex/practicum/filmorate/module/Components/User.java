@@ -1,31 +1,26 @@
 package ru.yandex.practicum.filmorate.module.Components;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NonNull;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @Data
+@AllArgsConstructor
 @Builder(toBuilder = true)
 public class User {
-    @NotNull
-    @NonNull
     private int id;
-    @Email
-    @NotEmpty
-    @NotNull
-    @NonNull
+    @Email(message = "Электронная почта должна соответствовать формату")
+    @NotEmpty(message = "Электронная почта не может быть пустой")
+    @NotNull(message = "Электронная почта не может содержать null")
     private String email;
-    @NotEmpty
-    @NotNull
-    @NonNull
-    private String login;
+    @NotEmpty(message = "Логин не может быть пустым")
+    @NotNull(message = "Логин содержит null")
+    private final String login;
     private String name;
-    @Past
+    @NotNull(message = "Поле с днем рождения содержит null")
+    @Past(message = "Дата рождения не может быть в будущем.")
     private LocalDate birthday;
 }
