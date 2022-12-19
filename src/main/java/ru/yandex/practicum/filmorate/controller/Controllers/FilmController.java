@@ -3,7 +3,7 @@ package ru.yandex.practicum.filmorate.controller.Controllers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.module.Components.Film;
-import ru.yandex.practicum.filmorate.module.ComponentsManager;
+import ru.yandex.practicum.filmorate.module.ComponentsManagers.ComponentsManager;
 import ru.yandex.practicum.filmorate.module.Exceptions.Exist.ExistException;
 import ru.yandex.practicum.filmorate.module.Exceptions.Exist.FilmExistException;
 
@@ -12,8 +12,8 @@ import javax.validation.ValidationException;
 import java.time.LocalDate;
 import java.util.List;
 
-import static ru.yandex.practicum.filmorate.module.ComponentsManager.getFilmsList;
-import static ru.yandex.practicum.filmorate.module.ComponentsStorage.films;
+import static ru.yandex.practicum.filmorate.module.ComponentsManagers.ComponentsManager.getFilmsList;
+import static ru.yandex.practicum.filmorate.module.ComponentsManagers.ComponentsStorage.films;
 
 /**
  * Это контроллер, который обрабатывает GET, POST & PUT запросы по пути /films

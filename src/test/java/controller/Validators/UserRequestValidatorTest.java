@@ -1,12 +1,12 @@
 package controller.Validators;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import ru.yandex.practicum.filmorate.controller.Validators.UserRequestValidator;
 import ru.yandex.practicum.filmorate.controller.Validators.Validator;
 import ru.yandex.practicum.filmorate.module.Components.User;
 import ru.yandex.practicum.filmorate.module.Exceptions.Invalid.InvalidException;
 import ru.yandex.practicum.filmorate.module.Exceptions.Invalid.UserInvalidException;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
@@ -14,8 +14,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserRequestValidatorTest {
 
-    static User user;
-    static Validator<User> validator = new UserRequestValidator();
+    private static User user;
+    private static final Validator<User> validator = new UserRequestValidator();
 
     @BeforeEach
      void setUp() {

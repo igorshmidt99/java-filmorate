@@ -3,7 +3,7 @@ package ru.yandex.practicum.filmorate.controller.Controllers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.module.Components.User;
-import ru.yandex.practicum.filmorate.module.ComponentsManager;
+import ru.yandex.practicum.filmorate.module.ComponentsManagers.ComponentsManager;
 import ru.yandex.practicum.filmorate.module.Exceptions.Exist.ExistException;
 import ru.yandex.practicum.filmorate.module.Exceptions.Exist.UserExistException;
 
@@ -11,8 +11,8 @@ import javax.validation.Valid;
 import javax.validation.ValidationException;
 import java.util.List;
 
-import static ru.yandex.practicum.filmorate.module.ComponentsManager.getUsersList;
-import static ru.yandex.practicum.filmorate.module.ComponentsStorage.users;
+import static ru.yandex.practicum.filmorate.module.ComponentsManagers.ComponentsManager.getUsersList;
+import static ru.yandex.practicum.filmorate.module.ComponentsManagers.ComponentsStorage.users;
 
 /**
  * Это контроллер, который обрабатывает GET, POST & PUT запросы по пути /films
@@ -35,6 +35,7 @@ public class UserController {
                 if (user.getEmail().equals(u.getEmail()))
                     throw new UserExistException("Пользователь с таким email уже существует!");
             }
+            if (user.getLogin().contains(" ")) throw new  ValidationException("Логин не может содержать пробелы");
             if (user.getName() == null || user.getName().isBlank()) user.setName(user.getLogin());
             ComponentsManager.createId(user);
             users.put(user.getId(), user);

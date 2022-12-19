@@ -12,8 +12,8 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FilmRequestValidatorTest {
-    static Film film;
-    static Validator<Film> validator = new FilmRequestValidator();
+    private static Film film;
+    private static final Validator<Film> validator = new FilmRequestValidator();
 
     @BeforeEach
     public void setUp() {
