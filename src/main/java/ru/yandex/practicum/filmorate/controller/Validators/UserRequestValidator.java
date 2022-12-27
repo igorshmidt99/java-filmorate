@@ -1,7 +1,7 @@
 package ru.yandex.practicum.filmorate.controller.Validators;
 
-import ru.yandex.practicum.filmorate.module.Components.User;
-import ru.yandex.practicum.filmorate.module.Exceptions.Invalid.UserInvalidException;
+import ru.yandex.practicum.filmorate.module.User;
+import ru.yandex.practicum.filmorate.controller.Exceptions.Invalid.UserInvalidException;
 
 import java.time.LocalDate;
 /**

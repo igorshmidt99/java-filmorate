@@ -4,9 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.yandex.practicum.filmorate.controller.Validators.UserRequestValidator;
 import ru.yandex.practicum.filmorate.controller.Validators.Validator;
-import ru.yandex.practicum.filmorate.module.Components.User;
-import ru.yandex.practicum.filmorate.module.Exceptions.Invalid.InvalidException;
-import ru.yandex.practicum.filmorate.module.Exceptions.Invalid.UserInvalidException;
+import ru.yandex.practicum.filmorate.module.User;
+import ru.yandex.practicum.filmorate.controller.Exceptions.Invalid.InvalidException;
+import ru.yandex.practicum.filmorate.controller.Exceptions.Invalid.UserInvalidException;
 
 import java.time.LocalDate;
 

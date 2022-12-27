@@ -2,10 +2,10 @@ package ru.yandex.practicum.filmorate.controller.Controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import ru.yandex.practicum.filmorate.module.Components.Film;
-import ru.yandex.practicum.filmorate.module.Exceptions.Exist.ExistException;
-import ru.yandex.practicum.filmorate.module.Exceptions.Exist.FilmExistException;
-import ru.yandex.practicum.filmorate.storage.InMemoryFilmStorage;
+import ru.yandex.practicum.filmorate.module.Film;
+import ru.yandex.practicum.filmorate.controller.Exceptions.Exist.ExistException;
+import ru.yandex.practicum.filmorate.controller.Exceptions.Exist.FilmExistException;
+import ru.yandex.practicum.filmorate.storage.InMemoryStorages.InMemoryFilmStorage;
 import ru.yandex.practicum.filmorate.storage.interfaces.FilmStorage;
 
 import javax.validation.Valid;

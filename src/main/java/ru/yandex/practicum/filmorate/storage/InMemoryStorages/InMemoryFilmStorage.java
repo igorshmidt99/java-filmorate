@@ -1,9 +1,8 @@
-package ru.yandex.practicum.filmorate.storage;
+package ru.yandex.practicum.filmorate.storage.InMemoryStorages;
 
-import lombok.Getter;
 import org.springframework.stereotype.Component;
-import ru.yandex.practicum.filmorate.module.Components.Film;
-import ru.yandex.practicum.filmorate.module.Exceptions.Exist.FilmExistException;
+import ru.yandex.practicum.filmorate.module.Film;
+import ru.yandex.practicum.filmorate.controller.Exceptions.Exist.FilmExistException;
 import ru.yandex.practicum.filmorate.storage.interfaces.FilmStorage;
 
 import javax.validation.ValidationException;
@@ -15,7 +14,7 @@ import java.util.Map;
 public class InMemoryFilmStorage implements FilmStorage {
 
     private final static LocalDate FIRST_MOVIE_DATE = LocalDate.of(1895, 12, 28);
-    private static int filmIdCounter;
+    private static int filmsIdCounter;
     private static final Map<Integer, Film> films = new HashMap<>();
 
     @Override
@@ -38,6 +37,7 @@ public class InMemoryFilmStorage implements FilmStorage {
     @Override
     public Film delete(Film film) throws FilmExistException {
         if (!films.containsKey(film.getId())) throw new FilmExistException("Этого фильма нет в коллекции.");
+        films.remove(film.getId());
         return film;
     }
 
@@ -47,7 +47,6 @@ public class InMemoryFilmStorage implements FilmStorage {
     }
 
     private void createId(Film film) {
-        filmIdCounter++;
-        film.setId(filmIdCounter);
+        film.setId(++filmsIdCounter);
     }
 }

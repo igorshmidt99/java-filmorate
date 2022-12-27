@@ -1,4 +1,4 @@
-package ru.yandex.practicum.filmorate.module.Exceptions.Exist;
+package ru.yandex.practicum.filmorate.controller.Exceptions.Exist;
 
 import lombok.experimental.StandardException;
 

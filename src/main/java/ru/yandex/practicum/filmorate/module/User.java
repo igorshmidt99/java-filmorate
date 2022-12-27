@@ -1,4 +1,4 @@
-package ru.yandex.practicum.filmorate.module.Components;
+package ru.yandex.practicum.filmorate.module;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
