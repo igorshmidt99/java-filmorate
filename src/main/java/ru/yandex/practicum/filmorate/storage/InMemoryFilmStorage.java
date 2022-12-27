@@ -14,15 +14,15 @@ import java.util.Map;
 @Component
 public class InMemoryFilmStorage implements FilmStorage {
 
-    @Getter
+    private final static LocalDate FIRST_MOVIE_DATE = LocalDate.of(1895, 12, 28);
     private static int filmIdCounter;
-
     private static final Map<Integer, Film> films = new HashMap<>();
+
     @Override
     public Film add(Film film) throws FilmExistException {
         if (films.containsKey(film.getId()))
             throw new FilmExistException("Этот фильм уже добавлен.");
-        if (film.getReleaseDate().isBefore(LocalDate.of(1895, 12, 28)))
+        if (film.getReleaseDate().isBefore(FIRST_MOVIE_DATE))
             throw new ValidationException("Дата релиза — не раньше 28 декабря 1895 года.");
         createId(film);
         return film;
@@ -36,8 +36,9 @@ public class InMemoryFilmStorage implements FilmStorage {
     }
 
     @Override
-    public Film delete(Film film) {
-        return null;
+    public Film delete(Film film) throws FilmExistException {
+        if (!films.containsKey(film.getId())) throw new FilmExistException("Этого фильма нет в коллекции.");
+        return film;
     }
 
     @Override

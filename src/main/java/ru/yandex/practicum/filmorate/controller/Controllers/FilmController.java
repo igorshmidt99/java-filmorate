@@ -1,7 +1,6 @@
 package ru.yandex.practicum.filmorate.controller.Controllers;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.module.Components.Film;
 import ru.yandex.practicum.filmorate.module.Exceptions.Exist.ExistException;
@@ -23,7 +22,6 @@ import java.util.List;
 public class FilmController {
     private final FilmStorage filmStorage;
 
-    @Autowired
     public FilmController(InMemoryFilmStorage inMemoryFilmStorage) {
         filmStorage = inMemoryFilmStorage;
     }

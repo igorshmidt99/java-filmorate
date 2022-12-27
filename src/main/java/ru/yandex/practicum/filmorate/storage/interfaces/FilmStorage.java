@@ -8,6 +8,6 @@ import java.util.List;
 public interface FilmStorage {
     Film add(Film film) throws FilmExistException;
     Film update(Film film) throws FilmExistException;
-    Film delete(Film film);
+    Film delete(Film film) throws FilmExistException;
     List<Film> getFilms();
 }
