@@ -1,12 +1,10 @@
 package ru.yandex.practicum.filmorate.storage;
 
-import ru.yandex.practicum.filmorate.module.Components.Film;
 import ru.yandex.practicum.filmorate.module.Components.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static ru.yandex.practicum.filmorate.storage.ComponentsStorage.films;
 import static ru.yandex.practicum.filmorate.storage.ComponentsStorage.users;
 
 /**
@@ -24,18 +22,7 @@ public class ComponentsManager {
         user.setId(id);
     }
 
-    public static void createId(Film film) {
-        int id = ComponentsStorage.getFilmIdCounter() + 1;
-        ComponentsStorage.setFilmIdCounter(id);
-        film.setId(id);
-    }
-
     public static List<User> getUsersList() {
         return new ArrayList<>(users.values());
     }
-
-    public static List<Film> getFilmsList() {
-        return new ArrayList<>(films.values());
-    }
-
 }

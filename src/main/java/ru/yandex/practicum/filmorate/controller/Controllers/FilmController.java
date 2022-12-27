@@ -1,19 +1,17 @@
 package ru.yandex.practicum.filmorate.controller.Controllers;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.module.Components.Film;
-import ru.yandex.practicum.filmorate.storage.ComponentsManager;
 import ru.yandex.practicum.filmorate.module.Exceptions.Exist.ExistException;
 import ru.yandex.practicum.filmorate.module.Exceptions.Exist.FilmExistException;
+import ru.yandex.practicum.filmorate.storage.InMemoryFilmStorage;
+import ru.yandex.practicum.filmorate.storage.interfaces.FilmStorage;
 
 import javax.validation.Valid;
 import javax.validation.ValidationException;
-import java.time.LocalDate;
 import java.util.List;
-
-import static ru.yandex.practicum.filmorate.storage.ComponentsManager.getFilmsList;
-import static ru.yandex.practicum.filmorate.storage.ComponentsStorage.films;
 
 /**
  * Это контроллер, который обрабатывает GET, POST & PUT запросы по пути /films
@@ -23,22 +21,25 @@ import static ru.yandex.practicum.filmorate.storage.ComponentsStorage.films;
 @RestController
 @RequestMapping("/films")
 public class FilmController {
+    private final FilmStorage filmStorage;
+
+    @Autowired
+    public FilmController(InMemoryFilmStorage inMemoryFilmStorage) {
+        filmStorage = inMemoryFilmStorage;
+    }
+
     @GetMapping
     public List<Film> getFilms() {
+        List<Film> films = filmStorage.getFilms();
         log.info("Список фильмов в размере {} передан.", films.size());
-        return getFilmsList();
+        return films;
     }
 
     @PostMapping
     public Film postFilm(@Valid @RequestBody Film film) throws FilmExistException {
         try {
-            if (films.containsValue(film))
-                throw new FilmExistException("Этот фильм уже добавлен.");
-            if (film.getReleaseDate().isBefore(LocalDate.of(1895, 12, 28)))
-                throw new ValidationException("Дата релиза — не раньше 28 декабря 1895 года.");
-            ComponentsManager.createId(film);
-            films.put(film.getId(), film);
-            log.info("Фильм {} добавлен в хранилище.", film.getName());
+            film = filmStorage.add(film);
+            log.info("Фильм {} добавлен в хранилище. ID #{}", film.getName(), film.getId());
             return film;
         } catch (ValidationException | ExistException e) {
             log.error(e.getMessage(), e);
