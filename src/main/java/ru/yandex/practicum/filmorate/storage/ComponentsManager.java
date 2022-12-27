@@ -1,4 +1,4 @@
-package ru.yandex.practicum.filmorate.module.ComponentsManagers;
+package ru.yandex.practicum.filmorate.storage;
 
 import ru.yandex.practicum.filmorate.module.Components.Film;
 import ru.yandex.practicum.filmorate.module.Components.User;
@@ -6,8 +6,8 @@ import ru.yandex.practicum.filmorate.module.Components.User;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ru.yandex.practicum.filmorate.module.ComponentsManagers.ComponentsStorage.films;
-import static ru.yandex.practicum.filmorate.module.ComponentsManagers.ComponentsStorage.users;
+import static ru.yandex.practicum.filmorate.storage.ComponentsStorage.films;
+import static ru.yandex.practicum.filmorate.storage.ComponentsStorage.users;
 
 /**
  * ComponentsManager манипулирует данными экземпляров User & Film.

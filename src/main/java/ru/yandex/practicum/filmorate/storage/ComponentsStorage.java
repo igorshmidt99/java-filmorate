@@ -1,4 +1,4 @@
-package ru.yandex.practicum.filmorate.module.ComponentsManagers;
+package ru.yandex.practicum.filmorate.storage;
 
 import lombok.Getter;
 import lombok.Setter;
