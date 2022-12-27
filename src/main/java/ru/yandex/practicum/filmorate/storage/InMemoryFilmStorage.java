@@ -20,7 +20,7 @@ public class InMemoryFilmStorage implements FilmStorage {
     private static final Map<Integer, Film> films = new HashMap<>();
     @Override
     public Film add(Film film) throws FilmExistException {
-        if (films.containsValue(film))
+        if (films.containsKey(film.getId()))
             throw new FilmExistException("Этот фильм уже добавлен.");
         if (film.getReleaseDate().isBefore(LocalDate.of(1895, 12, 28)))
             throw new ValidationException("Дата релиза — не раньше 28 декабря 1895 года.");
@@ -29,8 +29,10 @@ public class InMemoryFilmStorage implements FilmStorage {
     }
 
     @Override
-    public Film update(Film film) {
-        return null;
+    public Film update(Film film) throws FilmExistException {
+        if (!films.containsKey(film.getId())) throw new FilmExistException("Этого фильма нет в коллекции.");
+        films.put(film.getId(), film);
+        return film;
     }
 
     @Override

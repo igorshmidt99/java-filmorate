@@ -50,8 +50,7 @@ public class FilmController {
     @PutMapping
     public Film putFilm(@Valid @RequestBody Film film) throws FilmExistException {
         try {
-            if (!films.containsKey(film.getId())) throw new FilmExistException("Этого фильма нет в коллекции.");
-            films.put(film.getId(), film);
+            film = filmStorage.update(film);
             log.info("Информация о фильме {} изменена.", film.getName());
             return film;
         } catch (ValidationException | ExistException e) {
