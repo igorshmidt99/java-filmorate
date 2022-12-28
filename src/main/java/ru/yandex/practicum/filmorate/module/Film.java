@@ -26,4 +26,5 @@ public class Film {
     @Size(max=200, message = "Максимальная длина описания — 200 символов.")
     @NotNull(message = "Описание не может содержать null")
     private String description;
+    private int likes;
 }
