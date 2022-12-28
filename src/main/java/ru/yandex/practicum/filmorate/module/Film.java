@@ -1,8 +1,6 @@
 package ru.yandex.practicum.filmorate.module;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -10,7 +8,10 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class Film {
