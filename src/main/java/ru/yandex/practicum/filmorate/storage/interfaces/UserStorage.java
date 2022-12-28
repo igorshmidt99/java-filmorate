@@ -10,4 +10,5 @@ public interface UserStorage {
     User delete(User user) throws UserExistException;
     User update(User user) throws UserExistException;
     List<User> getUsers();
+    User getById(int id) throws UserExistException;
 }

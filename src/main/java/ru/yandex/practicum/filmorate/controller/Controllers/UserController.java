@@ -34,7 +34,7 @@ public class UserController {
     }
 
     @PostMapping
-    public User postUser(@Valid @RequestBody User user) throws UserExistException {
+    public User createUser(@Valid @RequestBody User user) throws UserExistException {
         try {
             userStorage.add(user);
             log.info("Новый пользователь {}, {} добавлен.", user.getName(), user.getEmail());
@@ -46,7 +46,7 @@ public class UserController {
     }
 
     @PutMapping
-    public User putUser(@Valid @RequestBody User user) throws UserExistException {
+    public User updateUser(@Valid @RequestBody User user) throws UserExistException {
         try {
             userStorage.update(user);
             log.info("Данные пользователя {}, {} обновлены.", user.getName(), user.getEmail());

@@ -9,6 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.time.LocalDate;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
@@ -26,4 +27,5 @@ public class User {
     @NotNull(message = "Поле с днем рождения содержит null")
     @Past(message = "Дата рождения не может быть в будущем.")
     private LocalDate birthday;
+    private final Map<Integer, User> usersFriends;
 }
