@@ -15,6 +15,7 @@ import java.util.Map;
 @EqualsAndHashCode(exclude = "usersFriends")
 @ToString(exclude = "usersFriends")
 @AllArgsConstructor
+@Builder(toBuilder = true)
 public class User {
     private int id;
     @Email(message = "Электронная почта должна соответствовать формату")

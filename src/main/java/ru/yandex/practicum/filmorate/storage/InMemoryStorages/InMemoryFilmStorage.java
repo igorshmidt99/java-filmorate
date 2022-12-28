@@ -24,6 +24,7 @@ public class InMemoryFilmStorage implements FilmStorage {
         if (film.getReleaseDate().isBefore(FIRST_MOVIE_DATE))
             throw new ValidationException("Дата релиза — не раньше 28 декабря 1895 года.");
         createId(film);
+        films.put(film.getId(), film);
         return film;
     }
 

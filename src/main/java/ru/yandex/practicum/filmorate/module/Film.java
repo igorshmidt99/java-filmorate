@@ -7,11 +7,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 @Getter
 @Setter
-@EqualsAndHashCode
-@ToString
+@EqualsAndHashCode(exclude = "likes")
+@ToString(exclude = "likes")
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class Film {
@@ -26,5 +28,9 @@ public class Film {
     @Size(max=200, message = "Максимальная длина описания — 200 символов.")
     @NotNull(message = "Описание не может содержать null")
     private String description;
-    private int likes;
+    private final Map<Integer, Integer> likes = new HashMap<>();
+
+    public int getLikesCount() {
+        return likes.size();
+    }
 }
