@@ -58,4 +58,19 @@ public class UserController {
             throw e;
         }
     }
+
+    @PutMapping("/{id}/friends/{friendId}")
+    public User addNewFriend(@PathVariable int id, @PathVariable int friendId) throws UserExistException {
+        return userService.addFriend(id, friendId);
+    }
+
+    @DeleteMapping("/{id}/friends/{friendId}")
+    public User deleteFriend(@PathVariable int id, @PathVariable int friendId) throws UserExistException {
+        return userService.removeFriend(id, friendId);
+    }
+
+    @GetMapping("/{id}/friends/common/{otherId}")
+    public List<User> mutualFriends(@PathVariable int id, @PathVariable int otherId) throws UserExistException {
+        return userService.getMutualFriends(id, otherId);
+    }
 }
