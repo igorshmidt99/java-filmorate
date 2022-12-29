@@ -2,10 +2,10 @@ package ru.yandex.practicum.filmorate.controller.Controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import ru.yandex.practicum.filmorate.module.User;
 import ru.yandex.practicum.filmorate.controller.Exceptions.Exist.ExistException;
 import ru.yandex.practicum.filmorate.controller.Exceptions.Exist.UserExistException;
-import ru.yandex.practicum.filmorate.storage.InMemoryStorages.InMemoryUserStorage;
+import ru.yandex.practicum.filmorate.module.User;
+import ru.yandex.practicum.filmorate.service.UserService;
 import ru.yandex.practicum.filmorate.storage.interfaces.UserStorage;
 
 import javax.validation.Valid;
@@ -22,8 +22,10 @@ import java.util.List;
 public class UserController {
 
     private final UserStorage userStorage;
-    public UserController(InMemoryUserStorage inMemoryUserStorage) {
-        userStorage = inMemoryUserStorage;
+    private final UserService userService;
+    public UserController(UserStorage userStorage, UserService userService) {
+        this.userStorage = userStorage;
+        this.userService = userService;
     }
 
     @GetMapping

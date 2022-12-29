@@ -30,7 +30,7 @@ public class Film {
     private String description;
     private final Map<Integer, Integer> likes = new HashMap<>();
 
-    public int getLikesCount() {
+    public Integer getLikesCount() {
         return likes.size();
     }
 }

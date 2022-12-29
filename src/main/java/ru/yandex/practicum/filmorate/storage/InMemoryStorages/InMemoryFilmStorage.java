@@ -47,6 +47,12 @@ public class InMemoryFilmStorage implements FilmStorage {
         return List.copyOf(films.values());
     }
 
+    @Override
+    public Film getById(int id) throws FilmExistException {
+        if (!films.containsKey(id)) throw new FilmExistException("Этого фильма нет в коллекции.");
+        return films.get(id);
+    }
+
     private void createId(Film film) {
         film.setId(++filmsIdCounter);
     }

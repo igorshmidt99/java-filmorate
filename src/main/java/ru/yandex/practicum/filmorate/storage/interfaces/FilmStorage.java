@@ -10,4 +10,5 @@ public interface FilmStorage {
     Film update(Film film) throws FilmExistException;
     Film delete(Film film) throws FilmExistException;
     List<Film> getFilms();
+    Film getById(int id) throws FilmExistException;
 }

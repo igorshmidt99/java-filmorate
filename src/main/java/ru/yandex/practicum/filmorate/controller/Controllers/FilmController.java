@@ -2,10 +2,10 @@ package ru.yandex.practicum.filmorate.controller.Controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import ru.yandex.practicum.filmorate.module.Film;
 import ru.yandex.practicum.filmorate.controller.Exceptions.Exist.ExistException;
 import ru.yandex.practicum.filmorate.controller.Exceptions.Exist.FilmExistException;
-import ru.yandex.practicum.filmorate.storage.InMemoryStorages.InMemoryFilmStorage;
+import ru.yandex.practicum.filmorate.module.Film;
+import ru.yandex.practicum.filmorate.service.FilmService;
 import ru.yandex.practicum.filmorate.storage.interfaces.FilmStorage;
 
 import javax.validation.Valid;
@@ -20,10 +20,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/films")
 public class FilmController {
+    private final FilmService filmService;
     private final FilmStorage filmStorage;
 
-    public FilmController(InMemoryFilmStorage inMemoryFilmStorage) {
-        filmStorage = inMemoryFilmStorage;
+    public FilmController(FilmStorage filmStorage, FilmService filmService) {
+        this.filmStorage = filmStorage;
+        this.filmService = filmService;
     }
 
     @GetMapping
