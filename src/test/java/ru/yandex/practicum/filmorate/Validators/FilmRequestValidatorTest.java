@@ -2,10 +2,10 @@ package ru.yandex.practicum.filmorate.Validators;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.yandex.practicum.filmorate.controller.Exceptions.Invalid.InvalidException;
-import ru.yandex.practicum.filmorate.controller.Validators.FilmRequestValidator;
-import ru.yandex.practicum.filmorate.controller.Validators.Validator;
-import ru.yandex.practicum.filmorate.module.Film;
+import ru.yandex.practicum.filmorate.module.exception.Invalid.InvalidException;
+import ru.yandex.practicum.filmorate.module.validator.FilmRequestValidator;
+import ru.yandex.practicum.filmorate.module.validator.Validator;
+import ru.yandex.practicum.filmorate.module.component.Film;
 
 import java.time.LocalDate;
 

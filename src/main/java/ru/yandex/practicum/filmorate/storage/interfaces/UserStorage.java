@@ -1,7 +1,7 @@
 package ru.yandex.practicum.filmorate.storage.interfaces;
 
-import ru.yandex.practicum.filmorate.module.User;
-import ru.yandex.practicum.filmorate.controller.Exceptions.Exist.UserExistException;
+import ru.yandex.practicum.filmorate.module.component.User;
+import ru.yandex.practicum.filmorate.module.exception.Exist.UserExistException;
 
 import java.util.List;
 

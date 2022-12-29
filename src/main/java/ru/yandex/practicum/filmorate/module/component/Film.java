@@ -1,4 +1,4 @@
-package ru.yandex.practicum.filmorate.module;
+package ru.yandex.practicum.filmorate.module.component;
 
 import lombok.*;
 

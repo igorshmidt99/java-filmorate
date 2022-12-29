@@ -1,7 +1,7 @@
 package ru.yandex.practicum.filmorate.storage.interfaces;
 
-import ru.yandex.practicum.filmorate.module.Film;
-import ru.yandex.practicum.filmorate.controller.Exceptions.Exist.FilmExistException;
+import ru.yandex.practicum.filmorate.module.component.Film;
+import ru.yandex.practicum.filmorate.module.exception.Exist.FilmExistException;
 
 import java.util.List;
 

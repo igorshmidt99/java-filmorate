@@ -1,10 +1,10 @@
-package ru.yandex.practicum.filmorate.controller.Controllers;
+package ru.yandex.practicum.filmorate.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import ru.yandex.practicum.filmorate.controller.Exceptions.Exist.ExistException;
-import ru.yandex.practicum.filmorate.controller.Exceptions.Exist.UserExistException;
-import ru.yandex.practicum.filmorate.module.User;
+import ru.yandex.practicum.filmorate.module.exception.Exist.ExistException;
+import ru.yandex.practicum.filmorate.module.exception.Exist.UserExistException;
+import ru.yandex.practicum.filmorate.module.component.User;
 import ru.yandex.practicum.filmorate.service.UserService;
 import ru.yandex.practicum.filmorate.storage.interfaces.UserStorage;
 
