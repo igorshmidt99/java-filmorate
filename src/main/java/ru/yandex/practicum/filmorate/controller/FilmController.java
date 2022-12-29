@@ -2,9 +2,11 @@ package ru.yandex.practicum.filmorate.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import ru.yandex.practicum.filmorate.module.component.Film;
 import ru.yandex.practicum.filmorate.module.exception.Exist.ExistException;
 import ru.yandex.practicum.filmorate.module.exception.Exist.FilmExistException;
-import ru.yandex.practicum.filmorate.module.component.Film;
+import ru.yandex.practicum.filmorate.module.exception.Exist.UserExistException;
+import ru.yandex.practicum.filmorate.module.exception.LikeException;
 import ru.yandex.practicum.filmorate.service.FilmService;
 import ru.yandex.practicum.filmorate.storage.interfaces.FilmStorage;
 
@@ -57,5 +59,27 @@ public class FilmController {
             log.error(e.getMessage(), e);
             throw e;
         }
+    }
+
+    @PutMapping("/{id}/like/{userId}")
+    public Film addLike(
+            @PathVariable int id,
+            @PathVariable int userId
+    ) throws UserExistException, FilmExistException, LikeException {
+        return filmService.plusLike(id, userId);
+    }
+
+    @DeleteMapping("/{id}/like/{userId}")
+    public Film removeLike(
+            @PathVariable int id,
+            @PathVariable int userId
+    ) throws UserExistException, FilmExistException, LikeException {
+        return filmService.minusLike(id, userId);
+    }
+
+    @GetMapping("/popular")
+    public List<Film> getPopularFilms(@RequestParam int count) {
+        if (count == 0) count = 10;
+        return filmService.getPopularFilms(count);
     }
 }

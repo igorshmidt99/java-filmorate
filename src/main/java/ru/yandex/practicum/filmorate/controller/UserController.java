@@ -20,9 +20,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-
     private final UserStorage userStorage;
     private final UserService userService;
+
     public UserController(UserStorage userStorage, UserService userService) {
         this.userStorage = userStorage;
         this.userService = userService;
@@ -62,21 +62,24 @@ public class UserController {
     @PutMapping("/{id}/friends/{friendId}")
     public User addNewFriend(
             @PathVariable int id,
-            @PathVariable int friendId) throws UserExistException {
+            @PathVariable int friendId
+    ) throws UserExistException {
         return userService.addFriend(id, friendId);
     }
 
     @DeleteMapping("/{id}/friends/{friendId}")
     public User deleteFriend(
             @PathVariable int id,
-            @PathVariable int friendId) throws UserExistException {
+            @PathVariable int friendId
+    ) throws UserExistException {
         return userService.removeFriend(id, friendId);
     }
 
     @GetMapping("/{id}/friends/common/{otherId}")
     public List<User> getMutualFriends(
             @PathVariable int id,
-            @PathVariable int otherId) throws UserExistException {
+            @PathVariable int otherId
+    ) throws UserExistException {
         return userService.getMutualFriends(id, otherId);
     }
 
