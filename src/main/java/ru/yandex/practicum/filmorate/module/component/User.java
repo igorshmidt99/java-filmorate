@@ -7,8 +7,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -17,7 +17,7 @@ import java.util.Map;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class User {
-    private int id;
+    private long id;
     @Email(message = "Электронная почта должна соответствовать формату")
     @NotEmpty(message = "Электронная почта не может быть пустой")
     @NotNull(message = "Электронная почта не может содержать null")
@@ -29,5 +29,5 @@ public class User {
     @NotNull(message = "Поле с днем рождения содержит null")
     @Past(message = "Дата рождения не может быть в будущем.")
     private LocalDate birthday;
-    private final Map<Integer, User> usersFriends = new HashMap<>();
+    private final Set<Long> usersFriends = new HashSet<>();
 }

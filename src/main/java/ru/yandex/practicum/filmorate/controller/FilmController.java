@@ -63,23 +63,27 @@ public class FilmController {
 
     @PutMapping("/{id}/like/{userId}")
     public Film addLike(
-            @PathVariable int id,
-            @PathVariable int userId
+            @PathVariable long id,
+            @PathVariable long userId
     ) throws UserExistException, FilmExistException, LikeException {
         return filmService.plusLike(id, userId);
     }
 
     @DeleteMapping("/{id}/like/{userId}")
     public Film removeLike(
-            @PathVariable int id,
-            @PathVariable int userId
+            @PathVariable long id,
+            @PathVariable long userId
     ) throws UserExistException, FilmExistException, LikeException {
         return filmService.minusLike(id, userId);
     }
 
     @GetMapping("/popular")
-    public List<Film> getPopularFilms(@RequestParam int count) {
-        if (count == 0) count = 10;
+    public List<Film> getPopularFilms(@RequestParam(defaultValue = "10") long count) {
         return filmService.getPopularFilms(count);
+    }
+
+    @GetMapping("/{id}")
+    public Film getFilmById(@PathVariable long id) throws FilmExistException {
+        return filmStorage.getById(id);
     }
 }

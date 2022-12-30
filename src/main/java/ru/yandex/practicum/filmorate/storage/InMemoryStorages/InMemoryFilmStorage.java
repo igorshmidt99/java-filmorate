@@ -14,8 +14,8 @@ import java.util.Map;
 public class InMemoryFilmStorage implements FilmStorage {
 
     private final static LocalDate FIRST_MOVIE_DATE = LocalDate.of(1895, 12, 28);
-    private static int filmsIdCounter;
-    private static final Map<Integer, Film> films = new HashMap<>();
+    private static long filmsIdCounter;
+    private static final Map<Long, Film> films = new HashMap<>();
 
     @Override
     public Film add(Film film) throws FilmExistException {
@@ -48,7 +48,7 @@ public class InMemoryFilmStorage implements FilmStorage {
     }
 
     @Override
-    public Film getById(int id) throws FilmExistException {
+    public Film getById(long id) throws FilmExistException {
         if (!films.containsKey(id)) throw new FilmExistException("Этого фильма нет в коллекции.");
         return films.get(id);
     }

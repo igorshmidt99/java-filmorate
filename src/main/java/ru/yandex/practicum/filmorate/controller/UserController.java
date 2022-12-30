@@ -2,9 +2,9 @@ package ru.yandex.practicum.filmorate.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import ru.yandex.practicum.filmorate.module.component.User;
 import ru.yandex.practicum.filmorate.module.exception.Exist.ExistException;
 import ru.yandex.practicum.filmorate.module.exception.Exist.UserExistException;
-import ru.yandex.practicum.filmorate.module.component.User;
 import ru.yandex.practicum.filmorate.service.UserService;
 import ru.yandex.practicum.filmorate.storage.interfaces.UserStorage;
 
@@ -61,30 +61,35 @@ public class UserController {
 
     @PutMapping("/{id}/friends/{friendId}")
     public User addNewFriend(
-            @PathVariable int id,
-            @PathVariable int friendId
+            @PathVariable long id,
+            @PathVariable long friendId
     ) throws UserExistException {
         return userService.addFriend(id, friendId);
     }
 
     @DeleteMapping("/{id}/friends/{friendId}")
     public User deleteFriend(
-            @PathVariable int id,
-            @PathVariable int friendId
+            @PathVariable long id,
+            @PathVariable long friendId
     ) throws UserExistException {
         return userService.removeFriend(id, friendId);
     }
 
     @GetMapping("/{id}/friends/common/{otherId}")
     public List<User> getMutualFriends(
-            @PathVariable int id,
-            @PathVariable int otherId
+            @PathVariable long id,
+            @PathVariable long otherId
     ) throws UserExistException {
         return userService.getMutualFriends(id, otherId);
     }
 
-    @GetMapping("/users/{id}/friends")
-    public List<User> getUserFriends(@PathVariable int id) throws UserExistException {
+    @GetMapping("/{id}/friends")
+    public List<User> getUserFriends(@PathVariable long id) throws UserExistException {
         return userService.getAllFriends(id);
+    }
+
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable long id) throws UserExistException {
+        return userStorage.getById(id);
     }
 }
