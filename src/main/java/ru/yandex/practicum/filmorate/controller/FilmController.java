@@ -41,6 +41,7 @@ public class FilmController {
     public Film postFilm(@Valid @RequestBody Film film) throws FilmExistException {
         try {
             film = filmStorage.add(film);
+            if (film == null) throw new FilmExistException("Этот фильм уже добавлен.");
             log.info("Фильм {} добавлен в хранилище. ID #{}", film.getName(), film.getId());
             return film;
         } catch (ValidationException | ExistException e) {
@@ -53,6 +54,7 @@ public class FilmController {
     public Film putFilm(@Valid @RequestBody Film film) throws FilmExistException {
         try {
             film = filmStorage.update(film);
+            if (film == null) throw new FilmExistException("Этого фильма нет в коллекции.");
             log.info("Информация о фильме {} изменена.", film.getName());
             return film;
         } catch (ValidationException | ExistException e) {
@@ -79,11 +81,21 @@ public class FilmController {
 
     @GetMapping("/popular")
     public List<Film> getPopularFilms(@RequestParam(defaultValue = "10") long count) {
-        return filmService.getPopularFilms(count);
+        List<Film> f = filmService.getPopularFilms(count);
+        log.info("Список популярных фильмов в размере {} передан.", f.size());
+        return f;
     }
 
     @GetMapping("/{id}")
     public Film getFilmById(@PathVariable long id) throws FilmExistException {
-        return filmStorage.getById(id);
+        try {
+            Film film = filmStorage.getById(id);
+            if (film == null) throw new FilmExistException("Этого фильма нет в коллекции.");
+            log.info("Фильм {} передан.", film.getName());
+            return film;
+        } catch (FilmExistException e) {
+            log.error(e.getMessage());
+            throw e;
+        }
     }
 }

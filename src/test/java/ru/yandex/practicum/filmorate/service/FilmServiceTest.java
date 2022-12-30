@@ -3,10 +3,10 @@ package ru.yandex.practicum.filmorate.service;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.yandex.practicum.filmorate.module.exception.Exist.FilmExistException;
-import ru.yandex.practicum.filmorate.module.exception.Exist.UserExistException;
 import ru.yandex.practicum.filmorate.module.component.Film;
 import ru.yandex.practicum.filmorate.module.component.User;
+import ru.yandex.practicum.filmorate.module.exception.Exist.FilmExistException;
+import ru.yandex.practicum.filmorate.module.exception.Exist.UserExistException;
 import ru.yandex.practicum.filmorate.module.exception.LikeException;
 import ru.yandex.practicum.filmorate.storage.InMemoryStorages.InMemoryFilmStorage;
 import ru.yandex.practicum.filmorate.storage.InMemoryStorages.InMemoryUserStorage;
@@ -23,12 +23,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class FilmServiceTest {
     private Film film;
     private User user;
-    private FilmStorage filmStorage = new InMemoryFilmStorage();
-    private UserStorage userStorage = new InMemoryUserStorage();
-    private FilmService service = new FilmService(filmStorage, userStorage);
+    private final FilmStorage filmStorage = new InMemoryFilmStorage();
+    private final UserStorage userStorage = new InMemoryUserStorage();
+    private final FilmService service = new FilmService(filmStorage, userStorage);
 
     @BeforeEach
-    void setUp() throws UserExistException, FilmExistException {
+    void setUp() {
         user = new User(0, "igoremail@gmail.com", "igorkiller2010","Igor Shmidt",
                 LocalDate.of(1999, 4, 7));
         film = new Film(0, "The Green Mile",
@@ -38,7 +38,7 @@ class FilmServiceTest {
     }
 
     @AfterEach
-    void tearDown() throws UserExistException, FilmExistException {
+    void tearDown() {
         userStorage.delete(user);
         filmStorage.delete(film);
     }

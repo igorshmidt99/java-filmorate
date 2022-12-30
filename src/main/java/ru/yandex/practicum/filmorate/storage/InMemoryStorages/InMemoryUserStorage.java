@@ -2,7 +2,6 @@ package ru.yandex.practicum.filmorate.storage.InMemoryStorages;
 
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.module.component.User;
-import ru.yandex.practicum.filmorate.module.exception.Exist.UserExistException;
 import ru.yandex.practicum.filmorate.storage.interfaces.UserStorage;
 
 import javax.validation.ValidationException;
@@ -20,10 +19,10 @@ public class InMemoryUserStorage implements UserStorage {
      * @return
      */
     @Override
-    public User add(User user) throws UserExistException {
+    public User add(User user) {
         for (User u : users.values()) {
             if (user.getEmail().equals(u.getEmail()))
-                throw new UserExistException("Пользователь с таким email уже существует!");
+                return null;
         }
         if (user.getLogin().contains(" ")) throw new ValidationException("Логин не может содержать пробелы");
         if (user.getName() == null || user.getName().isBlank()) user.setName(user.getLogin());
@@ -37,8 +36,8 @@ public class InMemoryUserStorage implements UserStorage {
      * @return
      */
     @Override
-    public User delete(User user) throws UserExistException {
-        if (!users.containsKey(user.getId())) throw new UserExistException("Этого пользователя не существует.");
+    public User delete(User user) {
+        if (!users.containsKey(user.getId())) return null;
         users.remove(user.getId());
         return user;
     }
@@ -48,8 +47,8 @@ public class InMemoryUserStorage implements UserStorage {
      * @return
      */
     @Override
-    public User update(User user) throws UserExistException {
-        if (!users.containsKey(user.getId())) throw new UserExistException("Этого пользователя не существует.");
+    public User update(User user) {
+        if (!users.containsKey(user.getId())) return null;
         users.put(user.getId(), user);
         return user;
     }
@@ -63,8 +62,8 @@ public class InMemoryUserStorage implements UserStorage {
     }
 
     @Override
-    public User getById(long id) throws UserExistException {
-        if (!users.containsKey(id)) throw new UserExistException("Этого пользователя не существует.");
+    public User getById(long id) {
+        if (!users.containsKey(id)) return null;
         return users.get(id);
     }
 

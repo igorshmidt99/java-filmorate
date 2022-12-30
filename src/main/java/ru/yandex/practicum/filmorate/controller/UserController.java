@@ -38,7 +38,8 @@ public class UserController {
     @PostMapping
     public User createUser(@Valid @RequestBody User user) throws UserExistException {
         try {
-            userStorage.add(user);
+            user = userStorage.add(user);
+            if (user == null) throw new UserExistException("Пользователь с таким email уже существует!");
             log.info("Новый пользователь {}, {} добавлен.", user.getName(), user.getEmail());
             return user;
         } catch (ValidationException | ExistException e) {
@@ -50,7 +51,8 @@ public class UserController {
     @PutMapping
     public User updateUser(@Valid @RequestBody User user) throws UserExistException {
         try {
-            userStorage.update(user);
+            user = userStorage.update(user);
+            if (user == null) throw new UserExistException("Этого пользователя не существует.");
             log.info("Данные пользователя {}, {} обновлены.", user.getName(), user.getEmail());
             return user;
         } catch (ValidationException | ExistException e) {
@@ -72,7 +74,14 @@ public class UserController {
             @PathVariable long id,
             @PathVariable long friendId
     ) throws UserExistException {
-        return userService.removeFriend(id, friendId);
+        try {
+            User user = userService.removeFriend(id, friendId);
+            log.info("Пользователь с id {} удален.", id);
+            return user;
+        } catch (UserExistException e) {
+            log.error(e.getMessage());
+            throw e;
+        }
     }
 
     @GetMapping("/{id}/friends/common/{otherId}")
@@ -80,16 +89,38 @@ public class UserController {
             @PathVariable long id,
             @PathVariable long otherId
     ) throws UserExistException {
-        return userService.getMutualFriends(id, otherId);
+        try {
+            List<User> u = userService.getMutualFriends(id, otherId);
+            log.info("Список общих друзей пользователя id #{} с пользователем id #{} передан.", id, otherId);
+            return u;
+        } catch (UserExistException e) {
+            log.error(e.getMessage());
+            throw e;
+        }
     }
 
     @GetMapping("/{id}/friends")
     public List<User> getUserFriends(@PathVariable long id) throws UserExistException {
-        return userService.getAllFriends(id);
+        try {
+            List<User> u = userService.getAllFriends(id);
+            log.info("Список друзей пользователя id #{} передан.", id);
+            return u;
+        } catch (UserExistException e) {
+            log.error(e.getMessage());
+            throw e;
+        }
     }
 
     @GetMapping("/{id}")
     public User getUserById(@PathVariable long id) throws UserExistException {
-        return userStorage.getById(id);
+        try {
+            User user = userStorage.getById(id);
+            if (user == null) throw new UserExistException("Этого пользователя не существует.");
+            log.info("Пользователь с id {} передан", id);
+            return user;
+        } catch (UserExistException e) {
+            log.error(e.getMessage());
+            throw e;
+        }
     }
 }

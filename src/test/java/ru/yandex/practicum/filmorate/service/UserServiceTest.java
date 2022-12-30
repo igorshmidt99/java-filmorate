@@ -3,8 +3,8 @@ package ru.yandex.practicum.filmorate.service;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.yandex.practicum.filmorate.module.exception.Exist.UserExistException;
 import ru.yandex.practicum.filmorate.module.component.User;
+import ru.yandex.practicum.filmorate.module.exception.Exist.UserExistException;
 import ru.yandex.practicum.filmorate.storage.InMemoryStorages.InMemoryUserStorage;
 import ru.yandex.practicum.filmorate.storage.interfaces.UserStorage;
 
@@ -39,7 +39,7 @@ class UserServiceTest {
     }
 
     @AfterEach
-    void tearDown() throws UserExistException {
+    void tearDown() {
         storage.delete(client);
         storage.delete(friend1);
         storage.delete(friend2);

@@ -2,7 +2,6 @@ package ru.yandex.practicum.filmorate.storage.InMemoryStorages;
 
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.module.component.Film;
-import ru.yandex.practicum.filmorate.module.exception.Exist.FilmExistException;
 import ru.yandex.practicum.filmorate.storage.interfaces.FilmStorage;
 
 import javax.validation.ValidationException;
@@ -18,9 +17,9 @@ public class InMemoryFilmStorage implements FilmStorage {
     private static final Map<Long, Film> films = new HashMap<>();
 
     @Override
-    public Film add(Film film) throws FilmExistException {
+    public Film add(Film film) {
         if (films.containsKey(film.getId()))
-            throw new FilmExistException("Этот фильм уже добавлен.");
+            return null;
         if (film.getReleaseDate().isBefore(FIRST_MOVIE_DATE))
             throw new ValidationException("Дата релиза — не раньше 28 декабря 1895 года.");
         createId(film);
@@ -29,15 +28,15 @@ public class InMemoryFilmStorage implements FilmStorage {
     }
 
     @Override
-    public Film update(Film film) throws FilmExistException {
-        if (!films.containsKey(film.getId())) throw new FilmExistException("Этого фильма нет в коллекции.");
+    public Film update(Film film) {
+        if (!films.containsKey(film.getId())) return null;
         films.put(film.getId(), film);
         return film;
     }
 
     @Override
-    public Film delete(Film film) throws FilmExistException {
-        if (!films.containsKey(film.getId())) throw new FilmExistException("Этого фильма нет в коллекции.");
+    public Film delete(Film film) {
+        if (!films.containsKey(film.getId())) return null;
         films.remove(film.getId());
         return film;
     }
@@ -48,8 +47,8 @@ public class InMemoryFilmStorage implements FilmStorage {
     }
 
     @Override
-    public Film getById(long id) throws FilmExistException {
-        if (!films.containsKey(id)) throw new FilmExistException("Этого фильма нет в коллекции.");
+    public Film getById(long id) {
+        if (!films.containsKey(id)) return null;
         return films.get(id);
     }
 

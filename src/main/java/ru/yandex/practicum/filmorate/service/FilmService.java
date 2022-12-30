@@ -24,7 +24,11 @@ public class FilmService {
 
     public Film plusLike(long filmId, long userId) throws UserExistException, FilmExistException, LikeException {
         User user = userStorage.getById(userId);
+        if (user == null)
+            throw new UserExistException("Этого пользователя не существует.");
         Film film = filmStorage.getById(filmId);
+        if (film == null)
+            throw new FilmExistException("Этого фильма нет в коллекции.");
         if (film.getLikes().contains(user.getId()))
             throw new LikeException("Этот пользователь уже поставил лайк.");
         film.getLikes().add(user.getId());
@@ -33,7 +37,11 @@ public class FilmService {
 
     public Film minusLike(long filmId, long userId) throws LikeException, UserExistException, FilmExistException {
         User user = userStorage.getById(userId);
+        if (user == null)
+            throw new UserExistException("Этого пользователя не существует.");
         Film film = filmStorage.getById(filmId);
+        if (film == null)
+            throw new FilmExistException("Этого фильма нет в коллекции.");
         if (!film.getLikes().contains(user.getId()))
             throw new LikeException("Этот пользователь не ставил лайк.");
         film.getLikes().remove(user.getId());

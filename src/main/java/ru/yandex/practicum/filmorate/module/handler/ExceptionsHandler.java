@@ -1,4 +1,4 @@
-package ru.yandex.practicum.filmorate.module.exception.handler;
+package ru.yandex.practicum.filmorate.module.handler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
