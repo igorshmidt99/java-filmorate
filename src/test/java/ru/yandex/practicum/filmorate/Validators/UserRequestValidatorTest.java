@@ -1,12 +1,12 @@
-package controller.Validators;
+package ru.yandex.practicum.filmorate.Validators;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.yandex.practicum.filmorate.controller.Validators.UserRequestValidator;
-import ru.yandex.practicum.filmorate.controller.Validators.Validator;
-import ru.yandex.practicum.filmorate.module.Components.User;
-import ru.yandex.practicum.filmorate.module.Exceptions.Invalid.InvalidException;
-import ru.yandex.practicum.filmorate.module.Exceptions.Invalid.UserInvalidException;
+import ru.yandex.practicum.filmorate.module.exception.Invalid.InvalidException;
+import ru.yandex.practicum.filmorate.module.exception.Invalid.UserInvalidException;
+import ru.yandex.practicum.filmorate.module.validator.UserRequestValidator;
+import ru.yandex.practicum.filmorate.module.validator.Validator;
+import ru.yandex.practicum.filmorate.module.component.User;
 
 import java.time.LocalDate;
 
@@ -19,45 +19,40 @@ class UserRequestValidatorTest {
 
     @BeforeEach
      void setUp() {
-        user = User.builder()
-                .name("Igor Shmidt")
-                .birthday(LocalDate.of(1999, 4, 7))
-                .email("igoremail@gmail.com")
-                .id(0)
-                .login("igorkiller2010")
-                .build();
+        user = new User(0, "leha_ubiytsa@gmail.com", "igorkiller2010","Igor Shmidt",
+                LocalDate.of(1999, 4, 7));
     }
 
     @Test
     public void whenEmailIsBlankAndEmailDoesntContainCharacterShouldThrowException() {
-        user = user.toBuilder().email("").build();
+        user.setEmail("");
         InvalidException e = assertThrows(UserInvalidException.class, () -> validator.validate(user));
         assertEquals(e.getMessage(), "Электронная почта не может быть пустой и должна содержать символ @.\n");
-        user.toBuilder().email("qwerty").build();
+        user.setEmail("qwerty");
         e = assertThrows(UserInvalidException.class, () -> validator.validate(user));
         assertEquals(e.getMessage(), "Электронная почта не может быть пустой и должна содержать символ @.\n");
     }
 
     @Test
     public void whenLogInIsEmptyShouldThrowException() {
-        user = user.toBuilder().login("").build();
+        user.setLogin("");
         InvalidException e = assertThrows(UserInvalidException.class, () -> validator.validate(user));
         assertEquals(e.getMessage(), "Логин не может быть пустым и содержать пробелы\n");
-        user.toBuilder().login("qwerty ").build();
+        user.setLogin("qwerty ");
         e = assertThrows(UserInvalidException.class, () -> validator.validate(user));
         assertEquals(e.getMessage(), "Логин не может быть пустым и содержать пробелы\n");
     }
 
     @Test
     public void whenBirthdayDateIsInTheFutureShouldThrowException() {
-        user = user.toBuilder().birthday(LocalDate.of(2025, 1, 1)).build();
+        user.setBirthday(LocalDate.of(2025, 1, 1));
         InvalidException e = assertThrows(UserInvalidException.class, () -> validator.validate(user));
         assertEquals(e.getMessage(), "Дата рождения не может быть в будущем.\n");
     }
 
     @Test
     public void whenNameIsEmptyFieldNameTakesAValueFromLogin() throws InvalidException {
-        user = user.toBuilder().name("").build();
+        user.setName("");
         validator.validate(user);
         assertEquals(user.getName(), user.getLogin());
     }
@@ -67,11 +62,9 @@ class UserRequestValidatorTest {
         String message = "Электронная почта не может быть пустой и должна содержать символ @.\n" +
                 "Логин не может быть пустым и содержать пробелы\n" +
                 "Дата рождения не может быть в будущем.\n";
-        user = user.toBuilder()
-                .birthday(LocalDate.of(2025, 1, 1))
-                .email("")
-                .login("")
-                .build();
+        user.setBirthday(LocalDate.of(2025, 1, 1));
+        user.setEmail("");
+        user.setLogin("");
         InvalidException e = assertThrows(UserInvalidException.class, () -> validator.validate(user));
         assertEquals(e.getMessage(), message);
     }

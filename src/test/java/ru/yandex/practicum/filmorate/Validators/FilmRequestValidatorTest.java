@@ -1,11 +1,11 @@
-package controller.Validators;
+package ru.yandex.practicum.filmorate.Validators;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.yandex.practicum.filmorate.controller.Validators.FilmRequestValidator;
-import ru.yandex.practicum.filmorate.controller.Validators.Validator;
-import ru.yandex.practicum.filmorate.module.Components.Film;
-import ru.yandex.practicum.filmorate.module.Exceptions.Invalid.InvalidException;
+import ru.yandex.practicum.filmorate.module.exception.Invalid.InvalidException;
+import ru.yandex.practicum.filmorate.module.validator.FilmRequestValidator;
+import ru.yandex.practicum.filmorate.module.validator.Validator;
+import ru.yandex.practicum.filmorate.module.component.Film;
 
 import java.time.LocalDate;
 
@@ -17,13 +17,8 @@ class FilmRequestValidatorTest {
 
     @BeforeEach
     public void setUp() {
-        film = Film.builder()
-                .id(1)
-                .name("The Green Mile")
-                .releaseDate(LocalDate.of(2000, 1, 1))
-                .duration(90)
-                .description("Jest")
-                .build();
+        film = new Film(1, "The Green Mile",
+                LocalDate.of(2000, 1, 1), 90, "Jest");
     }
     @Test
     public void whenFilmNameIsBlankShouldThrowException() {
