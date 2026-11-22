@@ -29,5 +29,4 @@ public class FilmController {
     public List<GetFilmRespDto> getAllFilms() {
         return filmService.getAllFilms();
     }
-    
 }
